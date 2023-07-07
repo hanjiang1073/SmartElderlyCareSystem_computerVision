@@ -3,8 +3,21 @@ from flask import Flask, jsonify, request
 import cv2
 import face_recognition
 
+from banarea.ban import banarea_blueprint
+from emotiondetect.emotion import emotion_blueprint
+from facedetect.faceType import faceType_blueprint
+from facedetect.faceFeature import faceFeature_blueprint
+from interactiondetect.interaction import interaction_blueprint
 
 app = Flask(__name__)
+
+# 在主应用程序中注册蓝图
+app.register_blueprint(faceType_blueprint)
+app.register_blueprint(faceFeature_blueprint)
+app.register_blueprint(banarea_blueprint)
+app.register_blueprint(interaction_blueprint)
+app.register_blueprint(emotion_blueprint)
+
 
 @app.route('/')
 def hello():
